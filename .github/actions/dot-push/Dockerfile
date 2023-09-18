@@ -87,4 +87,3 @@ RUN if [ -z "$secrets.DOT_TOKEN" ]; then \
     fi
 
 ENTRYPOINT ["/dot-cli/entrypoint.sh"]
-#ENTRYPOINT "${DOT_CLI_HOME}$ENTRYPOINT"

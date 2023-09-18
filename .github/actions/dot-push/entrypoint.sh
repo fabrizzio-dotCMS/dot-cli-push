@@ -1,10 +1,5 @@
 #!/bin/sh
 
-for var in "$@"
-do
-    echo "$var"
-done
-
   var=$(bash /dot-cli/run-java.sh "$@" )
   #echo "var: $var"
   echo "exit code: $?"
