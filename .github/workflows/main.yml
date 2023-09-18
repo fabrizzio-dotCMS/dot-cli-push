@@ -1,4 +1,4 @@
-name: GHA Capabilities
+name: dotCMS sync
 
 on: [push]
 
@@ -6,8 +6,12 @@ jobs:
   sync-with-dotcms:
     runs-on: ubuntu-latest
     env:
-      GLOBAL_PARAM: 'global'
-
+      # Global environment expected by dotCMS CLI
+      # This is how we instruct the cli the target server
+      DOT_API_URL: ${{ vars.DOT_API_URL }}
+      # This is how we instruct the cli the target folder in the repo
+      # By default it must be the root of the repo which is represented by /github/workspace
+      DOT_REPO_BASE_PATH: ${{ vars.DOT_REPO_BASE_PATH || '/github/workspace/' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -26,7 +30,7 @@ jobs:
               echo "$file was changed"
           done    
 
-      - name: Get Event Context properties
+      - name: Github Event Context properties
         run: |
           echo "Event: ${{ github.event }}"
           echo "Event Name: ${{ github.event_name }}"
@@ -44,7 +48,7 @@ jobs:
         id: dot-push
         with:
           command: 'push'
-          path: '/github/workspace/'
+          path: ${{ env.DOT_REPO_BASE_PATH }}
           removeAssetsOption: '--removeAssets'
           removeFoldersOption: '--removeFolders'
           dotTokenOption: '--token'
