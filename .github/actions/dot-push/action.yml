@@ -9,7 +9,7 @@ inputs:
   path:
     description: 'directory or file to push'
     required: true
-    default: 'push'
+    default: '/github/workspace/'
   removeAssetsOption:
     description: 'remove assets option'
     required: false

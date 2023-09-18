@@ -43,7 +43,7 @@ jobs:
           echo "Workflow: ${{ github.workflow }}"
           echo "PR: ${{ github.pull_request }}"
 
-      - name: Trigger dot-push
+      - name: dot-push
         uses: ./.github/actions/dot-push
         id: dot-push
         with:
