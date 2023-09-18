@@ -1,0 +1,51 @@
+name: GHA Capabilities
+
+on: [push]
+
+jobs:
+  sync-with-dotcms:
+    runs-on: ubuntu-latest
+    env:
+      GLOBAL_PARAM: 'global'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        id: checkout
+        with:
+          fetch-depth: 0
+
+      - name: Get changes
+        id: changed-files
+        run: |
+          echo "changed_files=$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | xargs)" >> $GITHUB_OUTPUT
+
+      - name: List changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.changed_files }}; do
+              echo "$file was changed"
+          done    
+
+      - name: Get Event Context properties
+        run: |
+          echo "Event: ${{ github.event }}"
+          echo "Event Name: ${{ github.event_name }}"
+          echo "Repository: ${{ github.repository }}"
+          echo "Commit SHA: ${{ github.sha }}"
+          echo "Commit Ref: ${{ github.ref }}"
+          echo "Head Ref: ${{ github.head_ref }}"
+          echo "Base Ref: ${{ github.base_ref }}"
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Workflow: ${{ github.workflow }}"
+          echo "PR: ${{ github.pull_request }}"
+
+      - name: Trigger dot-push
+        uses: ./workflows/actions/dot-cli
+        id: dot-cli-push
+        with:
+          command: 'push'
+          path: '/github/workspace/'
+          removeAssetsOption: '--removeAssets'
+          removeFoldersOption: '--removeFolders'
+          dotTokenOption: '--token'
+          dotToken: ${{ secrets.DOT_TOKEN }}
