@@ -86,5 +86,5 @@ RUN if [ -z "$secrets.DOT_TOKEN" ]; then \
         echo "A Token was found"; \
     fi
 
-#ENTRYPOINT ["/dot-cli/entrypoint.sh"]
-ENTRYPOINT "${DOT_CLI_HOME}$ENTRYPOINT"
+ENTRYPOINT ["/dot-cli/entrypoint.sh"]
+#ENTRYPOINT "${DOT_CLI_HOME}$ENTRYPOINT"
