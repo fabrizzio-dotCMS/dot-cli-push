@@ -40,8 +40,8 @@ jobs:
           echo "PR: ${{ github.pull_request }}"
 
       - name: Trigger dot-push
-        uses: ./workflows/actions/dot-push
-        id: dot-cli-push
+        uses: ./.github/actions/dot-push
+        id: dot-push
         with:
           command: 'push'
           path: '/github/workspace/'
