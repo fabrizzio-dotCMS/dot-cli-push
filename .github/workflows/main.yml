@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   sync-with-dotcms:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:22.04
     env:
       # Global environment expected by dotCMS CLI
       # This is how we instruct the cli the target server
@@ -12,6 +12,8 @@ jobs:
       # This is how we instruct the cli the target folder in the repo
       # By default it must be the root of the repo which is represented by /github/workspace
       DOT_REPO_BASE_PATH: ${{ vars.DOT_REPO_BASE_PATH || '/github/workspace/' }}
+      # This is how we instruct the cli to create the workspace if it does not exist
+      DOT_CREATE_WORKSPACE: ${{ vars.DOT_CREATE_WORKSPACE || 'true' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -43,7 +45,14 @@ jobs:
           echo "Workflow: ${{ github.workflow }}"
           echo "PR: ${{ github.pull_request }}"
 
-      - name: dot-push
+      - name: Create workspace if not exists
+        uses: ./.github/actions/dot-workspace
+        id: dot-workspace
+        with:
+          path: ${{ env.DOT_REPO_BASE_PATH }}
+          create-workspace: ${{ env.DOT_CREATE_WORKSPACE }}
+
+      - name: Trigger dot-push
         uses: ./.github/actions/dot-push
         id: dot-push
         with:
