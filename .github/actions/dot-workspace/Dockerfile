@@ -1,7 +1,7 @@
 FROM ubuntu
 LABEL authors="fabrizzioaraya"
 
-ENV DOT_WORKSPACE_YML=".dot-service.yml"
+ENV DOT_WORKSPACE_YML=".dot-workspace.yml"
 ENV FILES_NAME_SPACE="/files/"
 ENV CONTENT_TYPES_NAME_SPACE="/content-types/"
 ENV LANGS_NAME_SPACE="/languages/"
