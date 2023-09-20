@@ -7,12 +7,12 @@ ENV CONTENT_TYPES_NAME_SPACE="/content-types/"
 ENV LANGS_NAME_SPACE="/languages/"
 ENV SITES_NAME_SPACE="/sites/"
 ENV DEFAULT_WORKSPACE_PATH="/github/workspace/"
-ENV ENTRYPOINT="entrypoint.sh"
 
 # Set environment variables based on inputs
 ENV BASE_PATH=${INPUT_PATH:-$DEFAULT_WORKSPACE_PATH}
 ENV CREATE_WORKSPACE=${INPUT_CREATE_WORKSPACE:-"true"}
 
-COPY $ENTRYPOINT /$ENTRYPOINT
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
