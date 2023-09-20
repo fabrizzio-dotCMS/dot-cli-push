@@ -52,3 +52,5 @@ if [ ! -f "$SITES_PATH" ]; then
       echo "Creating sites path: $SITES_PATH";
       mkdir -p "$SITES_PATH";
 fi
+
+echo ls -la "$BASE_PATH"
