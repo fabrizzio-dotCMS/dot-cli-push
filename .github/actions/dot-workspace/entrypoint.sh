@@ -7,7 +7,7 @@ fi
 
 normalize() {
     in=$1
-    normalized=$(echo "$in" | sed 's,//,\/,g')
+    normalized=$(echo "$in" | sed -E 's#/+#/#g')
     echo "$normalized"
 }
 
