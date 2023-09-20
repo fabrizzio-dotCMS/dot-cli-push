@@ -5,7 +5,16 @@ if [ ! "$CREATE_WORKSPACE" = "true" ]; then
      exit 0;
 fi
 
+normalize() {
+    path=$1
+    normalized=$(echo "$path" | sed 's,//,\/,g')
+    echo "$normalized"
+}
+
+BASE_PATH=$(normalize "$BASE_PATH")
+
 WORKSPACE_FILE=$BASE_PATH/$DOT_WORKSPACE_YML
+WORKSPACE_FILE=$(normalize "$WORKSPACE_FILE")
 echo "Workspace file: $WORKSPACE_FILE"
 
 workspace_file_content='name: default
@@ -18,7 +27,7 @@ if [ ! -f "$WORKSPACE_FILE" ]; then
 fi
 
 FILES_PATH=$BASE_PATH/$FILES_NAME_SPACE
-FILES_PATH=$(echo "$FILES_PATH" | sed 's,//,\/,g')
+FILES_PATH=$(normalize "$FILES_PATH")
 
 echo "Files path: $FILES_PATH"
 if [ ! -f "$FILES_PATH" ]; then
@@ -26,14 +35,14 @@ if [ ! -f "$FILES_PATH" ]; then
 fi
 
 CONTENT_TYPES_PATH=$BASE_PATH/$CONTENT_TYPES_NAME_SPACE
-CONTENT_TYPES_PATH=$(echo "$CONTENT_TYPES_PATH" | sed 's,//,\/,g')
+CONTENT_TYPES_PATH=$(normalize "$CONTENT_TYPES_PATH")
 
 echo "Content types path: $CONTENT_TYPES_PATH"
 if [ ! -f "$CONTENT_TYPES_PATH" ]; then
       mkdir -p "$CONTENT_TYPES_PATH";
 fi
 
-SITES_PATH=$BASE_PATH/$SITES_NAME_SPACE
+SITES_PATH=$(normalize "$SITES_PATH")
 SITES_PATH=$(echo "$SITES_PATH" | sed 's,//,\/,g')
 
 echo "Sites path: $SITES_PATH"
