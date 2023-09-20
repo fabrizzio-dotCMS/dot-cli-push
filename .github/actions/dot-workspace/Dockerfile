@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu
 LABEL authors="fabrizzioaraya"
 
 ENV DOT_WORKSPACE_YML=".dot-service.yml"

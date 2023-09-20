@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   sync-with-dotcms:
-    runs-on: ubuntu:22.04
+    runs-on: ubuntu-latest
     env:
       # Global environment expected by dotCMS CLI
       # This is how we instruct the cli the target server
