@@ -1,4 +1,4 @@
-# dot-cli.yml
+# dot-push.yml
 name: 'dot-push'
 description: 'Fire dotCMS cli'
 inputs:

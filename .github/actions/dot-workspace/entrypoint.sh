@@ -53,4 +53,4 @@ if [ ! -f "$SITES_PATH" ]; then
       mkdir -p "$SITES_PATH";
 fi
 
-echo ls -la "$BASE_PATH"
+ls -la "$BASE_PATH"

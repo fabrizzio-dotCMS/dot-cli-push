@@ -1,5 +1,7 @@
 #!/bin/sh
 
+ ls -la /github/workspace/
+
   var=$(bash /dot-cli/run-java.sh "$@" )
   #echo "var: $var"
   echo "exit code: $?"
