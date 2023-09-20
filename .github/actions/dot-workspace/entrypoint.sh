@@ -6,8 +6,8 @@ if [ ! "$CREATE_WORKSPACE" = "true" ]; then
 fi
 
 normalize() {
-    path=$1
-    normalized=$(echo "$path" | sed 's,//,\/,g')
+    in=$1
+    normalized=$(echo "$in" | sed 's,//,\/,g')
     echo "$normalized"
 }
 
@@ -22,6 +22,7 @@ version: 1.0.0
 description: "DO NOT ERASE ME !!! I am a marker file required by dotCMS CLI."'
 
 if [ ! -f "$WORKSPACE_FILE" ]; then
+      echo "Creating workspace file: $WORKSPACE_FILE";
       echo "$workspace_file_content" >> "$WORKSPACE_FILE";
       cat "$WORKSPACE_FILE";
 fi
@@ -31,6 +32,7 @@ FILES_PATH=$(normalize "$FILES_PATH")
 
 echo "Files path: $FILES_PATH"
 if [ ! -f "$FILES_PATH" ]; then
+      echo "Creating files path: $FILES_PATH";
       mkdir -p "$FILES_PATH";
 fi
 
@@ -39,6 +41,7 @@ CONTENT_TYPES_PATH=$(normalize "$CONTENT_TYPES_PATH")
 
 echo "Content types path: $CONTENT_TYPES_PATH"
 if [ ! -f "$CONTENT_TYPES_PATH" ]; then
+      echo "Creating content types path: $CONTENT_TYPES_PATH";
       mkdir -p "$CONTENT_TYPES_PATH";
 fi
 
@@ -46,5 +49,6 @@ SITES_PATH=$BASE_PATH/$SITES_NAME_SPACE
 SITES_PATH=$(normalize "$SITES_PATH")
 echo "Sites path: $SITES_PATH"
 if [ ! -f "$SITES_PATH" ]; then
+      echo "Creating sites path: $SITES_PATH";
       mkdir -p "$SITES_PATH";
 fi
