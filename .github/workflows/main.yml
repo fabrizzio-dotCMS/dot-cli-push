@@ -63,7 +63,8 @@ jobs:
           dotTokenOption: '--token'
           dotToken: ${{ secrets.DOT_TOKEN }}
           # You can use the following to capture the exit code and fail the step
-          run: |            
+          run: |
+            echo "dot CLI tool has finished with exit code: $DOT_CLI_EXIT_CODE"
             # Check the exit code and fail the step if it's not what you expect
             if [ $DOT_CLI_EXIT_CODE -ne 0 ]; then
               echo "dot CLI tool has failed with exit code: $DOT_CLI_EXIT_CODE"

@@ -4,7 +4,7 @@
 
   bash /dot-cli/run-java.sh "$@"
   exit_code=$?
-  echo "exit code: $exit_code"å
+  echo "exit code: $exit_code"
   # Export the exit code as an environment variable
   export DOT_CLI_EXIT_CODE=$exit_code
 
