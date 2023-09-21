@@ -27,7 +27,7 @@ inputs:
     required: true
 
 outputs:
-  return-code: # id of output.
+  exit_code: # id of output.
     description: 'Command return code'
 
 runs:
