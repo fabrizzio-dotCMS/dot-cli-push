@@ -62,3 +62,10 @@ jobs:
           removeFoldersOption: '--removeFolders'
           dotTokenOption: '--token'
           dotToken: ${{ secrets.DOT_TOKEN }}
+          # You can use the following to capture the exit code and fail the step
+          run: |            
+            # Check the exit code and fail the step if it's not what you expect
+            if [ $DOT_CLI_EXIT_CODE -ne 0 ]; then
+              echo "dot CLI tool has failed with exit code: $DOT_CLI_EXIT_CODE"
+              exit 1  # This will fail the step
+            fi

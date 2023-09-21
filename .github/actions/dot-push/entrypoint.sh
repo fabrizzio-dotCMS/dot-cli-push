@@ -1,9 +1,11 @@
 #!/bin/sh
+  echo "Running dot-push action entrypoint.sh"
+  for word in "$@"; do echo "$word"; done
 
- ls -la /github/workspace/
+  bash /dot-cli/run-java.sh "$@"
+  exit_code=$?
+  # Export the exit code as an environment variable
+  export DOT_CLI_EXIT_CODE=$exit_code
 
-  var=$(bash /dot-cli/run-java.sh "$@" )
-  #echo "var: $var"
-  echo "exit code: $?"
-  echo "Quarkus log file"
+  echo "Quarkus log file contents:"
   cat "${QUARKUS_LOG_FILE_PATH}"

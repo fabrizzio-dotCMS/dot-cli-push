@@ -45,6 +45,14 @@ if [ ! -f "$CONTENT_TYPES_PATH" ]; then
       mkdir -p "$CONTENT_TYPES_PATH";
 fi
 
+LANGUAGE_PATH=$BASE_PATH/$LANGS_NAME_SPACE
+LANGUAGE_PATH=$(normalize "$LANGS_PATH")
+echo "Languages path: $LANGUAGE_PATH"
+if [ ! -f "$LANGUAGE_PATH" ]; then
+      echo "Creating languages path: $LANGUAGE_PATH";
+      mkdir -p "$LANGUAGE_PATH";
+fi
+
 SITES_PATH=$BASE_PATH/$SITES_NAME_SPACE
 SITES_PATH=$(normalize "$SITES_PATH")
 echo "Sites path: $SITES_PATH"
