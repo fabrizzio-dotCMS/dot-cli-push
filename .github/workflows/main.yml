@@ -65,9 +65,8 @@ jobs:
 
       - name: Check dot-push exit code
         run: |
-          echo "dot CLI tool has finished with exit code: $DOT_CLI_EXIT_CODE and lol is $LOL "
-          # Check the exit code and fail the step if it's not what you expect
-          if [ $DOT_CLI_EXIT_CODE -ne 0 ]; then
+          echo " ${{ steps.dot-push.outputs.exit-code }} "          
+          if [ ${{ steps.<id del step>.outputs.BUILD_HASH }} -ne 0 ]; then
             echo "dot CLI tool has failed with exit code: $DOT_CLI_EXIT_CODE"
             exit 1  # This will fail the step
           fi
