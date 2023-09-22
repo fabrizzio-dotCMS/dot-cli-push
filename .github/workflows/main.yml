@@ -58,7 +58,7 @@ jobs:
             echo "Workspace has been updated and needs to be committed"
             git config user.name "GitHub Actions"
             git config user.email "actions@github.com"
-            git add ${{ env.DOT_REPO_BASE_PATH }}
+            git add .
             git commit -m "pushing workspace changes"
             git push
           fi     

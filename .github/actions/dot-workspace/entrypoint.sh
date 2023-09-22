@@ -58,7 +58,7 @@ if [ ! -f "$CONTENT_TYPES_PATH" ]; then
 fi
 
 LANGUAGE_PATH=$BASE_PATH/$LANGS_NAME_SPACE
-LANGUAGE_PATH=$(normalize "$LANGS_PATH")
+LANGUAGE_PATH=$(normalize "$LANGUAGE_PATH")
 echo "Languages path: $LANGUAGE_PATH"
 if [ ! -f "$LANGUAGE_PATH" ]; then
       echo "Creating languages path: $LANGUAGE_PATH";
