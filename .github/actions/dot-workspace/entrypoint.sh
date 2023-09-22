@@ -1,5 +1,7 @@
 #!/bin/sh
 
+workspace_updated=false
+
 if [ ! "$CREATE_WORKSPACE" = "true" ]; then
      echo "Skipping workspace creation";
      exit 0;
@@ -25,6 +27,7 @@ if [ ! -f "$WORKSPACE_FILE" ]; then
       echo "Creating workspace file: $WORKSPACE_FILE";
       echo "$workspace_file_content" >> "$WORKSPACE_FILE";
       cat "$WORKSPACE_FILE";
+      workspace_updated=true
 fi
 
 FILES_PATH=$BASE_PATH/$FILES_NAME_SPACE
@@ -34,6 +37,14 @@ echo "Files path: $FILES_PATH"
 if [ ! -f "$FILES_PATH" ]; then
       echo "Creating files path: $FILES_PATH";
       mkdir -p "$FILES_PATH";
+
+      WORKING_EN=$(normalize "$FILES_PATH"/working/en-us/ )
+      mkdir -p "$WORKING_EN";
+
+      LIVE_EN=$(normalize "$FILES_PATH"/live/en-us/ )
+      mkdir -p "$LIVE_EN";
+
+      workspace_updated=true
 fi
 
 CONTENT_TYPES_PATH=$BASE_PATH/$CONTENT_TYPES_NAME_SPACE
@@ -43,6 +54,7 @@ echo "Content types path: $CONTENT_TYPES_PATH"
 if [ ! -f "$CONTENT_TYPES_PATH" ]; then
       echo "Creating content types path: $CONTENT_TYPES_PATH";
       mkdir -p "$CONTENT_TYPES_PATH";
+      workspace_updated=true
 fi
 
 LANGUAGE_PATH=$BASE_PATH/$LANGS_NAME_SPACE
@@ -51,6 +63,7 @@ echo "Languages path: $LANGUAGE_PATH"
 if [ ! -f "$LANGUAGE_PATH" ]; then
       echo "Creating languages path: $LANGUAGE_PATH";
       mkdir -p "$LANGUAGE_PATH";
+      workspace_updated=true
 fi
 
 SITES_PATH=$BASE_PATH/$SITES_NAME_SPACE
@@ -59,6 +72,9 @@ echo "Sites path: $SITES_PATH"
 if [ ! -f "$SITES_PATH" ]; then
       echo "Creating sites path: $SITES_PATH";
       mkdir -p "$SITES_PATH";
+      workspace_updated=true
 fi
 
 ls -la "$BASE_PATH"
+
+echo "workspace-updated=$workspace_updated" >> "$GITHUB_OUTPUT"

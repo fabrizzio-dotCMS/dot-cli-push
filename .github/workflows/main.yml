@@ -45,19 +45,23 @@ jobs:
           echo "Workflow: ${{ github.workflow }}"
           echo "PR: ${{ github.pull_request }}"
 
-      - name: Set up secret file
-        env:
-          DOT_TKN: ${{ secrets.DOT_TOKEN }}
-        run: |
-          echo $DOT_TKN >> secrets.txt
-          cat secrets.txt
-
       - name: Create workspace if not exists
         uses: ./.github/actions/dot-workspace
         id: dot-workspace
         with:
           path: ${{ env.DOT_REPO_BASE_PATH }}
           create-workspace: ${{ env.DOT_CREATE_WORKSPACE }}
+
+      - name: Persist updated workspace
+        run: |
+          if [ ${{ steps.dot-workspace.outputs.workspace-updated }} ]; then
+            echo "Workspace has been updated and needs to be committed"
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git add ${{ env.DOT_REPO_BASE_PATH }}
+            git commit -m "pushing workspace changes"
+            git push
+          fi     
 
       - name: Trigger dot-push
         uses: ./.github/actions/dot-push
@@ -71,8 +75,7 @@ jobs:
           dotToken: ${{ secrets.DOT_TOKEN }}
 
       - name: Check dot-push exit code
-        run: |
-          echo " ${{ steps.dot-push.outputs.exit-code }} "          
+        run: |                    
           if [ ${{ steps.dot-push.outputs.exit_code }} -ne 0 ]; then
             echo "dot CLI tool has failed with exit code: ${{ steps.dot-push.outputs.exit_code }}"
             exit 1
