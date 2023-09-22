@@ -10,6 +10,7 @@ ENV DOT_CLI_JAR="dot-cli.jar"
 ENV DEMO_API_URL="https://demo.dotcms.com/api"
 ENV DOT_SERVICES_YML="dot-service.yml"
 ENV ENTRYPOINT="entrypoint.sh"
+ENV RUNNER="cli-1.0.0-SNAPSHOT-runner.jar"
 ENV DOT_CLI_HOME=/dot-cli/
 
 #the services yml is used to store the server configurations or profiles if you Will
@@ -41,7 +42,8 @@ RUN apt-get update && \
 RUN echo "downloading dot CLI from ${CLI_RELEASE_DOWNLOAD_URL}"
 
 #Download the CLI from our relase repo and story as dot-cli.jar
-RUN curl ${CLI_RELEASE_DOWNLOAD_URL} -L -o ${DOT_CLI_HOME}${DOT_CLI_JAR}
+#RUN curl ${CLI_RELEASE_DOWNLOAD_URL} -L -o ${DOT_CLI_HOME}${DOT_CLI_JAR}
+COPY ${RUNNER} ${DOT_CLI_HOME}${DOT_CLI_JAR}
 RUN chmod 777 "${DOT_CLI_HOME}${DOT_CLI_JAR}"
 
 #Check the size of the file
