@@ -49,7 +49,7 @@ if [ ! -f "$FILES_PATH" ]; then
       LIVE_EN=$(normalize "$FILES_PATH"/live/en-us/ )
       echo "Live en-us path: $LIVE_EN";
       mkdir -p "$LIVE_EN";
-      echo "$placeholder_file_content" >> "$WORKING_EN".placeholder
+      echo "$placeholder_file_content" >> "$LIVE_EN".placeholder
 
       workspace_updated=true
 fi
