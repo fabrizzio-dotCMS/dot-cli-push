@@ -39,9 +39,11 @@ if [ ! -f "$FILES_PATH" ]; then
       mkdir -p "$FILES_PATH";
 
       WORKING_EN=$(normalize "$FILES_PATH"/working/en-us/ )
+      echo "Working en-us path: $WORKING_EN";
       mkdir -p "$WORKING_EN";
 
       LIVE_EN=$(normalize "$FILES_PATH"/live/en-us/ )
+      echo "Live en-us path: $LIVE_EN";
       mkdir -p "$LIVE_EN";
 
       workspace_updated=true

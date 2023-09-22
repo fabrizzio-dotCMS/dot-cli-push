@@ -52,6 +52,8 @@ jobs:
           path: ${{ env.DOT_REPO_BASE_PATH }}
           create-workspace: ${{ env.DOT_CREATE_WORKSPACE }}
 
+      # This step requires permission to push to the repo
+      # you need to grant permission in repo settings
       - name: Persist updated workspace
         run: |
           if [ ${{ steps.dot-workspace.outputs.workspace-updated }} ]; then
