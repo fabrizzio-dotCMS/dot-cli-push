@@ -1,6 +1,4 @@
 #!/bin/sh
-echo "Running dot-workspace action :::"
-
 workspace_updated=false
 
 if [ ! "$CREATE_WORKSPACE" = "true" ]; then
@@ -42,7 +40,7 @@ FILES_PATH=$BASE_PATH/$FILES_NAME_SPACE
 FILES_PATH=$(normalize "$FILES_PATH")
 
 echo "Files path: $FILES_PATH"
-if [ ! -f "$FILES_PATH" ]; then
+if [ ! -d "$FILES_PATH" ]; then
       echo "Creating files path: $FILES_PATH";
       mkdir -p "$FILES_PATH";
 
@@ -63,7 +61,7 @@ CONTENT_TYPES_PATH=$BASE_PATH/$CONTENT_TYPES_NAME_SPACE
 CONTENT_TYPES_PATH=$(normalize "$CONTENT_TYPES_PATH")
 
 echo "Content types path: $CONTENT_TYPES_PATH"
-if [ ! -f "$CONTENT_TYPES_PATH" ]; then
+if [ ! -d "$CONTENT_TYPES_PATH" ]; then
       echo "Creating content types path: $CONTENT_TYPES_PATH";
       mkdir -p "$CONTENT_TYPES_PATH";
       echo "$placeholder_file_content" >> "$CONTENT_TYPES_PATH".placeholder
@@ -73,7 +71,7 @@ fi
 LANGUAGE_PATH=$BASE_PATH/$LANGS_NAME_SPACE
 LANGUAGE_PATH=$(normalize "$LANGUAGE_PATH")
 echo "Languages path: $LANGUAGE_PATH"
-if [ ! -f "$LANGUAGE_PATH" ]; then
+if [ ! -d "$LANGUAGE_PATH" ]; then
       echo "Creating languages path: $LANGUAGE_PATH";
       mkdir -p "$LANGUAGE_PATH";
       echo "$placeholder_file_content" >> "$LANGUAGE_PATH".placeholder
@@ -83,7 +81,7 @@ fi
 SITES_PATH=$BASE_PATH/$SITES_NAME_SPACE
 SITES_PATH=$(normalize "$SITES_PATH")
 echo "Sites path: $SITES_PATH"
-if [ ! -f "$SITES_PATH" ]; then
+if [ ! -d "$SITES_PATH" ]; then
       echo "Creating sites path: $SITES_PATH";
       mkdir -p "$SITES_PATH";
       echo "$placeholder_file_content" >> "$SITES_PATH".placeholder
