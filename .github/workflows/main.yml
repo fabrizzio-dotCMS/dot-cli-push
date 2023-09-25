@@ -75,6 +75,7 @@ jobs:
           removeFoldersOption: '--removeFolders'
           dotTokenOption: '--token'
           dotToken: ${{ secrets.DOT_TOKEN }}
+          showError: '-e'
 
       - name: Check dot-push exit code
         run: |                    

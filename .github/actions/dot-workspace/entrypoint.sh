@@ -1,4 +1,6 @@
 #!/bin/sh
+echo "Running dot-workspace action :::"
+
 workspace_updated=false
 
 if [ ! "$CREATE_WORKSPACE" = "true" ]; then
@@ -13,6 +15,9 @@ normalize() {
 }
 
 BASE_PATH=$(normalize "$BASE_PATH")
+
+echo "Base path: $BASE_PATH"
+ls -la "$BASE_PATH"
 
 WORKSPACE_FILE=$BASE_PATH/$DOT_WORKSPACE_YML
 WORKSPACE_FILE=$(normalize "$WORKSPACE_FILE")
