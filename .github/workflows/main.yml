@@ -56,7 +56,7 @@ jobs:
       # you need to grant read/write permission for workflows in the repo settings
       - name: Persist updated workspace
         run: |
-          if [ ${{ steps.dot-workspace.outputs.workspace-updated }} ]; then
+          if [ ${{ steps.dot-workspace.outputs.workspace-updated }} = true ]; then
             echo "Workspace has been updated and needs to be committed"
             git config user.name "GitHub Actions"
             git config user.email "actions@github.com"
